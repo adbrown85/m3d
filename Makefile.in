@@ -1,0 +1,157 @@
+# @configure_input@
+
+# Package
+package      := @PACKAGE_NAME@
+version      := @PACKAGE_VERSION@
+major        := @PACKAGE_MAJOR_VERSION@
+minor        := @PACKAGE_MINOR_VERSION@
+tarname      := @PACKAGE_TARNAME@
+
+# Directories
+prefix       := @prefix@
+exec_prefix  := @exec_prefix@
+bindir       := @bindir@
+libdir       := @libdir@
+includedir   := @includedir@
+srcdir       := @srcdir@
+builddir     := build
+moduledir    := $(tarname)
+VPATH        := $(srcdir) $(builddir) $(moduledir)
+pkgcfgdir    := $(libdir)/pkgconfig
+
+# Tools
+CXX          := @CXX@
+INSTALL      := @INSTALL@
+
+# Compiler options
+CPPFLAGS     := @CPPFLAGS@
+CXXFLAGS     := @CXXFLAGS@
+INCLUDES     := -I$(srcdir)
+DEFS         := @DEFS@
+DEPS_CFLAGS  := @DEPS_CFLAGS@
+CXXOPTS      := $(CPPFLAGS) $(CXXFLAGS) $(INCLUDES) $(DEFS) $(DEPS_CFLAGS)
+
+# Linker options
+LIBS         := @LIBS@
+LDFLAGS      := @LDFLAGS@
+DEPS_LIBS    := @DEPS_LIBS@
+LDOPTS       := $(LDFLAGS) $(LIBS) $(DEPS_LIBS)
+
+# Files
+test_sources := $(notdir $(wildcard $(moduledir)/*Test.cxx))
+tests        := $(subst .cxx,,$(test_sources))
+test_depends := $(addsuffix .d,$(tests))
+sources      := $(filter-out $(test_sources),$(notdir $(wildcard $(moduledir)/*.cxx)))
+headers      := $(subst .cxx,.hxx,$(sources))
+objects      := $(subst .cxx,.lo,$(sources))
+depends      := $(subst .lo,.d,$(objects))
+library      := lib$(tarname).la
+pkgcfgfile   := $(tarname).pc
+
+# Interface
+.PHONY: all clean distclean maintainer-clean
+.DEFAULT: all
+all: objects tests library
+clean:
+	$(RM) -r $(builddir)
+distclean: clean
+	$(RM) config.hpp
+	$(RM) config.log
+	$(RM) config.status
+	$(RM) Makefile
+	$(RM) $(pkgcfgfile)
+maintainer-clean: distclean
+	$(RM) aclocal.m4
+	$(RM) -r autom4te.cache
+	$(RM) autoscan.log
+	$(RM) configure.scan
+	$(RM) config.guess
+	$(RM) config.hpp.in
+	$(RM) config.hpp.in~
+	$(RM) config.sub
+	$(RM) configure
+	$(RM) install-sh
+	$(RM) libtool
+	$(RM) ltmain.sh
+
+# Objects
+.PHONY: objects
+objects: $(objects)
+%.lo: %.cxx %.hxx
+	@echo "  CXX   $@"
+	@libtool --mode=compile --quiet $(CXX) \
+            $(CXXOPTS) \
+            -c \
+            -o $(builddir)/$@ \
+            $<
+	@$(CXX) \
+            $(CXXOPTS) \
+            -MM \
+            -MF $(builddir)/$(subst .lo,.d,$@) \
+            -MP \
+            -MT $@ \
+            $<
+
+# Tests
+.PHONY: tests
+tests: $(tests)
+%Test: %Test.cxx
+	@echo "  CXX   $@"
+	@libtool --mode=link --quiet $(CXX) \
+            $(CXXOPTS) \
+            $(LDOPTS) \
+            -o $(builddir)/$@ \
+            $< \
+            $(addprefix $(builddir)/,$(filter %.lo,$^))
+
+# Library
+.PHONY: library
+library: $(library)
+$(library): $(objects)
+	@echo "  LD    $@"
+	@libtool --mode=link --quiet $(CXX) \
+			$(LDOPTS) \
+            -o $(builddir)/$(library) \
+            $(addprefix $(builddir)/,$(objects)) \
+			-rpath $(libdir) \
+			-version-info $(minor):$(minor)
+
+# Installation
+.PHONY: install uninstall
+install:
+	@echo "  INSTALL $(library)"
+	@$(INSTALL) -d $(libdir)
+	@libtool --mode=install --quiet $(INSTALL) $(builddir)/$(library) $(libdir)
+	@libtool --mode=finish -n --quiet $(libdir)
+	@echo "  INSTALL $(includedir)/$(tarname)"
+	@$(INSTALL) -d $(includedir)/$(tarname)
+	@$(INSTALL) -m 0644 $(addprefix $(moduledir)/,$(headers)) $(includedir)/$(tarname)
+	@echo "  INSTALL $(pkgcfgfile)"
+	@$(INSTALL) -d $(pkgcfgdir)
+	@$(INSTALL) -m 0644 $(pkgcfgfile) $(pkgcfgdir)
+uninstall:
+	@echo "  UNINSTALL $(library)"
+	@libtool --mode=uninstall $(RM) $(library)
+	@echo "  UNINSTALL $(includedir)/$(tarname)"
+	@$(RM) -r $(includedir)/$(tarname)
+	@echo "  UNINSTALL $(pkgcfgfile)"
+	@$(RM) $(pkgcfgdir)/$(pkgcfgfile)
+
+# Dependencies
+.PHONY: test_depends
+test_depends: $(test_depends)
+$(builddir)/%Test.d: %Test.cxx
+	@echo "  GEN   $@"
+	@$(INSTALL) -d $(builddir)
+	@$(CXX) \
+            $(CXXOPTS) \
+            -MM \
+            -MP \
+            -MT '$(subst .cxx,,$<) $(subst .cxx,.d,$<)' \
+            $< \
+            | sed 's|\.hxx|\.lo|g' \
+            | sed 's|[[:alnum:]/]*/||g' \
+            > $@
+ifneq (clean,$(findstring clean,$(MAKECMDGOALS)))
+  -include $(addprefix $(builddir)/,$(depends) $(test_depends))
+endif
