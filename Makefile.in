@@ -5,6 +5,7 @@ package      := @PACKAGE_NAME@
 version      := @PACKAGE_VERSION@
 major        := @PACKAGE_MAJOR_VERSION@
 minor        := @PACKAGE_MINOR_VERSION@
+incremental  := @PACKAGE_INCREMENTAL_VERSION@
 tarname      := @PACKAGE_TARNAME@
 
 # Directories
@@ -114,7 +115,7 @@ $(library): $(objects)
             -o $(builddir)/$(library) \
             $(addprefix $(builddir)/,$(objects)) \
 			-rpath $(libdir) \
-			-version-info $(minor):0:$(minor)
+			-version-info $(minor):$(incremental):$(minor)
 
 # Installation
 .PHONY: install uninstall
