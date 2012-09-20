@@ -16,6 +16,7 @@ libdir       := @libdir@
 includedir   := @includedir@
 srcdir       := @srcdir@
 builddir     := build
+docdir       := doc
 moduledir    := $(tarname)
 VPATH        := $(srcdir) $(builddir) $(moduledir)
 pkgcfgdir    := $(libdir)/pkgconfig
@@ -55,6 +56,7 @@ pkgcfgfile   := $(tarname).pc
 all: objects tests library
 clean:
 	$(RM) -r $(builddir)
+	$(RM) -r $(docdir)
 distclean: clean
 	$(RM) config.h
 	$(RM) config.log
@@ -159,3 +161,8 @@ $(builddir)/%Test.d: %Test.cxx
 ifneq (clean,$(findstring clean,$(MAKECMDGOALS)))
   -include $(addprefix $(builddir)/,$(depends) $(test_depends))
 endif
+
+# Documentation
+.PHONY: html
+html:
+	@doxygen
