@@ -179,6 +179,7 @@ Mat3 Mat3::fromArrayInRowMajor(const float arr[3][3]) {
  * @param c1 First column
  * @param c2 Second column
  * @param c3 Third column
+ * @return Matrix with values copied from the three columns appropriately
  */
 Mat3 Mat3::fromColumns(const Vec3& c1, const Vec3& c2, const Vec3& c3) {
     Mat3 mat;
@@ -194,6 +195,7 @@ Mat3 Mat3::fromColumns(const Vec3& c1, const Vec3& c2, const Vec3& c3) {
  * @param r1 First row
  * @param r2 Second row
  * @param r3 Third row
+ * @return Matrix with values copied from the three rows appropriately
  */
 Mat3 Mat3::fromRows(const Vec3& r1, const Vec3 &r2, const Vec3& r3) {
     Mat3 mat;
