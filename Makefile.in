@@ -55,7 +55,7 @@ all: objects tests library
 clean:
 	$(RM) -r $(builddir)
 distclean: clean
-	$(RM) config.hpp
+	$(RM) config.h
 	$(RM) config.log
 	$(RM) config.status
 	$(RM) Makefile
@@ -66,8 +66,8 @@ maintainer-clean: distclean
 	$(RM) autoscan.log
 	$(RM) configure.scan
 	$(RM) config.guess
-	$(RM) config.hpp.in
-	$(RM) config.hpp.in~
+	$(RM) config.h.in
+	$(RM) config.h.in~
 	$(RM) config.sub
 	$(RM) configure
 	$(RM) install-sh
