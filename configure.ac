@@ -3,8 +3,8 @@ AC_PREREQ([2.67])
 
 # Initialize package information
 define([MY_NAME], [M3d])
-define([MY_MAJOR_VERSION], [0])
-define([MY_MINOR_VERSION], [1])
+define([MY_MAJOR_VERSION], [1])
+define([MY_MINOR_VERSION], [0])
 define([MY_VERSION], MY_MAJOR_VERSION.MY_MINOR_VERSION)
 define([MY_EMAIL], [adb1413@rit.edu])
 define([MY_TARNAME], [m3d])
