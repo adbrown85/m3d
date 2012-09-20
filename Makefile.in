@@ -126,6 +126,7 @@ install:
 	@echo "  INSTALL $(includedir)/$(tarname)"
 	@$(INSTALL) -d $(includedir)/$(tarname)
 	@$(INSTALL) -m 0644 $(addprefix $(moduledir)/,$(headers)) $(includedir)/$(tarname)
+	@$(INSTALL) -m 0644 $(moduledir)/common.h $(includedir)/$(tarname)
 	@echo "  INSTALL $(pkgcfgfile)"
 	@$(INSTALL) -d $(pkgcfgdir)
 	@$(INSTALL) -m 0644 $(pkgcfgfile) $(pkgcfgdir)
