@@ -1,1 +1,42 @@
 M3d - Math for 3D graphics
+
+M3d supplies mathematical structures, including vectors, matrices, and
+quaternions, necessary for doing 3D graphics.  Currently all operations are
+done in double-precision, but utility methods are provided for converting to
+both float and double arrays, making it easy to use the structures with other
+libraries and technologies.  Implementations are kept simple, and test cases
+have been written to verify their integrity.
+
+To install M3d, run the three commands below.  By default its headers will be
+installed in '/usr/local/include' and its shared library will be installed in
+'/usr/local/lib'.  You may need to provide administrator priveleges to the
+'make install' command using 'sudo' or a similar method.  Note that currently
+GNU libtool [1] and CppUnit [2] are required to build M3d.
+
+    ./configure
+    make
+    make install
+
+After that M3d can be used in your project by including its headers and
+linking against its shared library when you build.  The easiest way to do that
+is by using pkg-config [3].  Simply pass 'm3d' to it with the 'libs' and
+'cflags' options.  The example below compiles an application that depends on
+M3d.
+
+    g++ -o Application Application.cxx `pkg-config --libs --cflags m3d`
+
+Note if you've checked out M3d using Git, you'll need to run './bootstrap'
+before './configure' to generate the configure script.  To do that you'll also
+need to install GNU Autoconf [4].
+
+To generate documentation using Doxygen, run 'make html'.  Then open the
+'index.html' file in the 'doc/html' directory.
+
+See M3d on GitHub [5] for more details.
+
+
+[1] http://www.gnu.org/software/libtool
+[2] http://sourceforge.net/projects/cppunit
+[3] http://www.freedesktop.org/wiki/Software/pkg-config
+[4] http://www.gnu.org/software/autoconf
+[5] http://www.github.com/adbrown85/m3d
