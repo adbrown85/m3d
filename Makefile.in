@@ -102,7 +102,7 @@ tests: $(tests)
             $(LDOPTS) \
             -o $(builddir)/$@ \
             $< \
-            $(addprefix $(builddir)/,$(filter %.lo,$^))
+            $(addprefix $(builddir)/,$(filter %.lo,$(notdir $^)))
 
 # Library
 .PHONY: library
