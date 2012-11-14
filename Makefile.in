@@ -105,7 +105,7 @@ tests: $(tests)
             -o $(builddir)/$@ \
             $(CXXOPTS) $(LDOPTS) \
             $< \
-            $(addprefix $(builddir)/,$(filter %.lo,$(notdir $^)))
+            $(addprefix $(builddir)/,$(notdir $(filter %.lo,$^)))
 check: tests
 	@for i in $(tests); do $(builddir)/$$i; done
 
