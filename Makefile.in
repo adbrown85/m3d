@@ -28,6 +28,7 @@ CXX          := @CXX@
 INSTALL      := @INSTALL@
 MKDIR        := mkdir -p
 CP           := cp
+TAR          := tar
 
 # Compiler options
 CPPFLAGS     := @CPPFLAGS@
@@ -193,5 +194,5 @@ dist: all
 	@$(CP) install-sh $(tardir)
 	@$(CP) $(pkgcfgfile).in $(tardir)
 	@$(MKDIR) $(distdir)
-	@tar -czf $(distdir)/$(tarfile) $(tardir)
+	@$(TAR) -czf $(distdir)/$(tarfile) $(tardir)
 	@$(RM) -r $(tardir)
