@@ -51,7 +51,7 @@ sources      := $(filter-out $(test_sources),$(notdir $(wildcard $(moduledir)/*.
 headers      := $(subst .cxx,.hxx,$(sources))
 objects      := $(subst .cxx,.lo,$(sources))
 depends      := $(subst .lo,.d,$(objects)) $(addsuffix .d,$(tests))
-library      := lib$(tarname).la
+library      := lib$(tarname)-$(major).la
 pkgcfgfile   := $(tarname).pc
 tarfile      := $(tarname)-$(version).tar.gz
 
