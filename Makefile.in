@@ -47,11 +47,10 @@ LDOPTS       := $(LDFLAGS) $(LIBS) $(DEPS_LIBS)
 # Files
 test_sources := $(notdir $(wildcard $(moduledir)/*Test.cxx))
 tests        := $(subst .cxx,,$(test_sources))
-test_depends := $(addsuffix .d,$(tests))
 sources      := $(filter-out $(test_sources),$(notdir $(wildcard $(moduledir)/*.cxx)))
 headers      := $(subst .cxx,.hxx,$(sources))
 objects      := $(subst .cxx,.lo,$(sources))
-depends      := $(subst .lo,.d,$(objects))
+depends      := $(subst .lo,.d,$(objects)) $(addsuffix .d,$(tests))
 library      := lib$(tarname).la
 pkgcfgfile   := $(tarname).pc
 tarfile      := $(tarname)-$(version).tar.gz
@@ -94,13 +93,6 @@ objects: $(objects)
             -o $(builddir)/$@ \
             $(CXXOPTS) \
             -c \
-            $<
-	@$(CXX) \
-            $(CXXOPTS) \
-            -MM \
-            -MF $(builddir)/$(subst .lo,.d,$@) \
-            -MP \
-            -MT $@ \
             $<
 
 # Tests
@@ -153,8 +145,19 @@ uninstall:
 	@$(RM) $(pkgcfgdir)/$(pkgcfgfile)
 
 # Dependencies
-.PHONY: test_depends
-test_depends: $(test_depends)
+.PHONY: depends
+depends: $(depends)
+$(builddir)/%.d: %.hxx
+	@echo "  GEN   $@"
+	@$(INSTALL) -d $(builddir)
+	@$(CXX) \
+            $(CXXOPTS) \
+            -MM \
+            -MP \
+            $(subst .hxx,.cxx,$<) \
+            | sed 's|[[:alnum:]/]*/||g' \
+            | sed 's|\([[:alnum:]]*\)\.o|\1.lo build/\1.d|' \
+            > $@
 $(builddir)/%Test.d: %Test.cxx
 	@echo "  GEN   $@"
 	@$(INSTALL) -d $(builddir)
