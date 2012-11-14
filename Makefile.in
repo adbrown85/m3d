@@ -89,10 +89,11 @@ maintainer-clean: distclean
 objects: $(objects)
 %.lo: %.cxx %.hxx
 	@echo "  CXX   $@"
-	@libtool --mode=compile --quiet $(CXX) \
+	@libtool --mode=compile --quiet \
+            $(CXX) \
+            -o $(builddir)/$@ \
             $(CXXOPTS) \
             -c \
-            -o $(builddir)/$@ \
             $<
 	@$(CXX) \
             $(CXXOPTS) \
@@ -107,10 +108,10 @@ objects: $(objects)
 tests: $(tests)
 %Test: %Test.cxx
 	@echo "  CXX   $@"
-	@libtool --mode=link --quiet $(CXX) \
-            $(CXXOPTS) \
-            $(LDOPTS) \
+	@libtool --mode=link --quiet \
+            $(CXX) \
             -o $(builddir)/$@ \
+            $(CXXOPTS) $(LDOPTS) \
             $< \
             $(addprefix $(builddir)/,$(filter %.lo,$(notdir $^)))
 check: tests
@@ -121,12 +122,13 @@ check: tests
 library: $(library)
 $(library): $(objects)
 	@echo "  LD    $@"
-	@libtool --mode=link --quiet $(CXX) \
+	@libtool --mode=link --quiet \
+            $(CXX) \
+            -o $(builddir)/$@ \
 			$(LDOPTS) \
-            -o $(builddir)/$(library) \
-            $(addprefix $(builddir)/,$(objects)) \
 			-rpath $(libdir) \
-			-version-info $(minor):$(incremental):$(minor)
+			-version-info $(minor):$(incremental):$(minor) \
+            $(addprefix $(builddir)/,$(objects))
 
 # Installation
 .PHONY: install uninstall
