@@ -133,7 +133,7 @@ install:
 	@$(INSTALL) -d $(includedir)/$(tarname)
 	@$(INSTALL) -m 0644 $(addprefix $(moduledir)/,$(headers)) $(includedir)/$(tarname)
 	@$(INSTALL) -m 0644 $(moduledir)/common.h $(includedir)/$(tarname)
-	@echo "  INSTALL $(pkgcfgfile)"
+	@echo "  INSTALL $(pkgcfgdir)/$(pkgcfgfile)"
 	@$(INSTALL) -d $(pkgcfgdir)
 	@$(INSTALL) -m 0644 $(pkgcfgfile) $(pkgcfgdir)
 uninstall:
@@ -141,7 +141,7 @@ uninstall:
 	@libtool --mode=uninstall $(RM) $(library)
 	@echo "  UNINSTALL $(includedir)/$(tarname)"
 	@$(RM) -r $(includedir)/$(tarname)
-	@echo "  UNINSTALL $(pkgcfgfile)"
+	@echo "  UNINSTALL $(pkgcfgdir)/$(pkgcfgfile)"
 	@$(RM) $(pkgcfgdir)/$(pkgcfgfile)
 
 # Dependencies
