@@ -12,4 +12,4 @@ configure
 dist/
 doc/
 install-sh
-m3d.pc
+m3d-*.pc

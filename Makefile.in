@@ -52,7 +52,7 @@ headers      := $(subst .cxx,.hxx,$(sources))
 objects      := $(subst .cxx,.lo,$(sources))
 depends      := $(subst .lo,.d,$(objects)) $(addsuffix .d,$(tests))
 library      := lib$(tarname)-$(major).la
-pkgcfgfile   := $(tarname).pc
+pkgcfgfile   := $(tarname)-$(major).pc
 tarfile      := $(tarname)-$(version).tar.gz
 
 # Interface
