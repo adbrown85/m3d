@@ -165,10 +165,10 @@ $(builddir)/%Test.d: %Test.cxx
             $(CXXOPTS) \
             -MM \
             -MP \
-            -MT '$(subst .cxx,,$<) $(subst .cxx,.d,$<)' \
             $< \
-            | sed 's|\.hxx|\.lo|g' \
             | sed 's|[[:alnum:]/]*/||g' \
+            | sed 's|\([[:alnum:]]*\)\.o|\1 build/\1.d|' \
+            | sed 's|\.hxx|\.lo|g' \
             > $@
 ifeq (clean,$(findstring clean,$(MAKECMDGOALS)))
   # empty
