@@ -138,7 +138,7 @@ install:
 	@$(INSTALL) -m 0644 $(pkgcfgfile) $(pkgcfgdir)
 uninstall:
 	@echo "  UNINSTALL $(libdir)/$(library)"
-	@libtool --mode=uninstall $(RM) $(library)
+	@libtool --mode=uninstall $(RM) $(libdir)/$(library)
 	@echo "  UNINSTALL $(includedir)/$(tarname)"
 	@$(RM) -r $(includedir)/$(tarname)
 	@echo "  UNINSTALL $(pkgcfgdir)/$(pkgcfgfile)"
