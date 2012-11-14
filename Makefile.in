@@ -44,11 +44,12 @@ DEPS_LIBS    := @DEPS_LIBS@
 LDOPTS       := $(LDFLAGS) $(LIBS) $(DEPS_LIBS)
 
 # Files
-test_sources := $(notdir $(wildcard $(tarname)/*Test.cxx))
-tests        := $(subst .cxx,,$(test_sources))
-sources      := $(filter-out $(test_sources),$(notdir $(wildcard $(tarname)/*.cxx)))
-headers      := $(subst .cxx,.hxx,$(sources))
-objects      := $(subst .cxx,.lo,$(sources))
+all_sources  := $(wildcard $(srcdir)/$(tarname)/*.cxx)
+main_sources := $(filter-out %Test.cxx,$(all_sources))
+test_sources := $(filter %Test.cxx,$(all_sources))
+headers      := $(subst .cxx,.hxx,$(main_sources))
+objects      := $(notdir $(subst .cxx,.lo,$(main_sources)))
+tests        := $(notdir $(subst .cxx,,$(test_sources)))
 depends      := $(subst .lo,.d,$(objects)) $(addsuffix .d,$(tests))
 library      := lib$(tarname)-$(major).la
 pkgcfgfile   := $(tarname)-$(major).pc
@@ -130,7 +131,7 @@ install:
 	@libtool --mode=finish -n --quiet $(libdir)
 	@echo "  INSTALL $(includedir)/$(tarname)-$(major)"
 	@$(INSTALL) -d $(includedir)/$(tarname)-$(major)/$(tarname)
-	@$(INSTALL) -m 0644 $(addprefix $(tarname)/,$(headers)) $(includedir)/$(tarname)-$(major)/$(tarname)
+	@$(INSTALL) -m 0644 $(headers) $(includedir)/$(tarname)-$(major)/$(tarname)
 	@$(INSTALL) -m 0644 $(tarname)/common.h $(includedir)/$(tarname)-$(major)/$(tarname)
 	@echo "  INSTALL $(pkgcfgdir)/$(pkgcfgfile)"
 	@$(INSTALL) -d $(pkgcfgdir)
@@ -190,9 +191,9 @@ dist: all
 	@$(MKDIR) $(tardir)
 	@$(MKDIR) $(tardir)/$(tarname)
 	@$(CP) $(tarname)/common.h $(tardir)/$(tarname)
-	@$(CP) $(addprefix $(tarname)/,$(sources)) $(tardir)/$(tarname)
-	@$(CP) $(addprefix $(tarname)/,$(headers)) $(tardir)/$(tarname)
-	@$(CP) $(addprefix $(tarname)/,$(test_sources)) $(tardir)/$(tarname)
+	@$(CP) $(main_sources) $(tardir)/$(tarname)
+	@$(CP) $(headers) $(tardir)/$(tarname)
+	@$(CP) $(test_sources) $(tardir)/$(tarname)
 	@$(CP) README $(tardir)
 	@$(CP) Makefile.in $(tardir)
 	@$(CP) configure $(tardir)
