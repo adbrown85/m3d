@@ -67,6 +67,7 @@ distclean: clean
 	$(RM) config.h
 	$(RM) config.log
 	$(RM) config.status
+	$(RM) libtool
 	$(RM) Makefile
 	$(RM) $(pkgcfgfile)
 maintainer-clean: distclean
@@ -80,7 +81,6 @@ maintainer-clean: distclean
 	$(RM) config.sub
 	$(RM) configure
 	$(RM) install-sh
-	$(RM) libtool
 	$(RM) ltmain.sh
 
 # Objects
