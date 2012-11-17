@@ -1,5 +1,6 @@
 # Check for Autoconf
 AC_PREREQ([2.67])
+AC_CONFIG_MACRO_DIR([m4])
 
 # Initialize package information
 define([MY_NAME], [M3d])
@@ -34,6 +35,7 @@ AC_HEADER_STDBOOL
 AC_PROG_INSTALL
 AC_PROG_SED
 PKG_PROG_PKG_CONFIG
+LT_INIT
 
 # Check for CppUnit
 error_no_cppunit() {

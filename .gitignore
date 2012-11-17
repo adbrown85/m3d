@@ -12,4 +12,7 @@ configure
 dist/
 doc/
 install-sh
+libtool
+ltmain.sh
 m3d-*.pc
+m4/
