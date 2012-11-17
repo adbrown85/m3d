@@ -195,6 +195,7 @@ dist: all
 	@$(CP) $(headers) $(tardir)/$(tarname)
 	@$(CP) $(test_sources) $(tardir)/$(tarname)
 	@$(CP) LICENSE $(tardir)
+	@$(CP) NOTICE $(tardir)
 	@$(CP) README $(tardir)
 	@$(CP) Makefile.in $(tardir)
 	@$(CP) configure $(tardir)

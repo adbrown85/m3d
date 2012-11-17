@@ -1,0 +1,4 @@
+For unit testing, M3d uses CppUnit, developed by Michael Feathers, Jerome
+Lacoste, E. Sommerlade, Baptiste Lepilleur, Bastiaan Bakker, Steve Robbins,
+and Harvey Brydon.  It is licensed under the LGPL v2.1, and it may be obtained
+from http://sourceforge.net/projects/cppunit.
