@@ -119,7 +119,7 @@ $(library): $(objects)
             -o $(builddir)/$@ \
 			$(LDOPTS) \
 			-rpath $(libdir) \
-			-version-info $(minor):$(incremental):$(minor) \
+			-version-info $(minor):$(incremental):0 \
             $(addprefix $(builddir)/,$(objects))
 
 # Installation
