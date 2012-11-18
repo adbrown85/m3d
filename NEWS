@@ -1,0 +1,5 @@
+0.1
+ - Added 3x3 and 4x4 matrices
+ - Added 3- and 4-component vectors
+ - Added quaternion implementation
+ - Added Math utility with some common constants and functions
