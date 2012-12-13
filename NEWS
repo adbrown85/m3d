@@ -1,3 +1,6 @@
+0.1.1
+ - Fixed pkg-config file not using major version
+
 0.1
  - Added 3x3 and 4x4 matrices
  - Added 3- and 4-component vectors
