@@ -64,6 +64,8 @@ public:
     void toArrayInRowMajor(float arr[3][3]) const;
     std::string toString() const;
 // Operators
+    bool operator==(const Mat3& mat) const;
+    bool operator!=(const Mat3& mat) const;
     const Vec3& operator[](int j) const;
     Vec3& operator[](int j);
     Mat3 operator*(const Mat3& mat) const;

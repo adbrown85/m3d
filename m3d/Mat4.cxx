@@ -426,6 +426,36 @@ string Mat4::toString() const {
 // OPERATORS
 
 /**
+ * Checks if another matrix is equal to this one.
+ *
+ * @param mat Matrix to compare
+ * @return `true` if other matrix is exactly equal to this one
+ */
+bool Mat4::operator==(const Mat4& mat) const {
+    for (int i = 0; i < ORDER; ++i) {
+        if (columns[i] != mat.columns[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * Checks if another matrix does not equal this one.
+ *
+ * @param mat Matrix to compare
+ * @return `true` if other matrix is not exactly equal to this one
+ */
+bool Mat4::operator!=(const Mat4& mat) const {
+    for (int i = 0; i < ORDER; ++i) {
+        if (columns[i] != mat.columns[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
  * Retrieves a constant reference to a column in the matrix.
  *
  * @param j Index of column, in the range [0 .. 3]

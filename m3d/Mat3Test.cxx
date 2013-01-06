@@ -149,6 +149,73 @@ public:
     }
 
     /**
+     * Ensures `Mat3::operator==` returns `true` for equal instances.
+     */
+    void testEqualityOperatorWithEqualInstances() {
+        double arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        M3d::Mat3 m1 = Mat3::fromArrayInColumnMajor(arr);
+        M3d::Mat3 m2 = Mat3::fromArrayInColumnMajor(arr);
+        CPPUNIT_ASSERT(m1 == m2);
+    }
+
+    /**
+     * Ensures `Mat3::operator==` returns `false` for matrices with unequal first columns.
+     */
+    void testEqualityOperatorWithUnequalFirstColumns() {
+
+        // Make first matrix
+        M3d::Mat3 m1;
+        m1[0] = M3d::Vec3(0.0);
+        m1[1] = M3d::Vec3(1.0);
+        m1[2] = M3d::Vec3(2.0);
+
+        // Make second matrix
+        M3d::Mat3 m2(m1);
+        m2[0] = M3d::Vec3(-1.0);
+
+        // Assert not equal
+        CPPUNIT_ASSERT(!(m1 == m2));
+    }
+
+    /**
+     * Ensures `Mat3::operator==` returns `false` for matrices with unequal second columns.
+     */
+    void testEqualityOperatorWithUnequalSecondColumns() {
+
+        // Make first matrix
+        M3d::Mat3 m1;
+        m1[0] = M3d::Vec3(0.0);
+        m1[1] = M3d::Vec3(1.0);
+        m1[2] = M3d::Vec3(2.0);
+
+        // Make second matrix
+        M3d::Mat3 m2(m1);
+        m2[1] = M3d::Vec3(-1.0);
+
+        // Assert not equal
+        CPPUNIT_ASSERT(!(m1 == m2));
+    }
+
+    /**
+     * Ensures `Mat3::operator==` returns `false` for matrices with unequal third columns.
+     */
+    void testEqualityOperatorWithUnequalThirdColumns() {
+
+        // Make first matrix
+        M3d::Mat3 m1;
+        m1[0] = M3d::Vec3(0.0);
+        m1[1] = M3d::Vec3(1.0);
+        m1[2] = M3d::Vec3(2.0);
+
+        // Make second matrix
+        M3d::Mat3 m2(m1);
+        m2[2] = M3d::Vec3(-1.0);
+
+        // Assert not equal
+        CPPUNIT_ASSERT(!(m1 == m2));
+    }
+
+    /**
      * Ensures fromArrayInColumnMajor works with a one-dimensional double array.
      */
     void testFromArrayInColumnMajorDoubleArray() {
@@ -404,6 +471,73 @@ public:
         CPPUNIT_ASSERT_EQUAL(7.0, mat[0][2]);
         CPPUNIT_ASSERT_EQUAL(8.0, mat[1][2]);
         CPPUNIT_ASSERT_EQUAL(9.0, mat[2][2]);
+    }
+
+    /**
+     * Ensures `Mat3::operator!=` returns `false` for equal instances.
+     */
+    void testInequalityOperatorWithEqualInstances() {
+        double arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        M3d::Mat3 m1 = Mat3::fromArrayInColumnMajor(arr);
+        M3d::Mat3 m2 = Mat3::fromArrayInColumnMajor(arr);
+        CPPUNIT_ASSERT(!(m1 != m2));
+    }
+
+    /**
+     * Ensures `Mat3::operator!=` returns `true` for matrices with unequal first columns.
+     */
+    void testInequalityOperatorWithUnequalFirstColumns() {
+
+        // Make first matrix
+        M3d::Mat3 m1;
+        m1[0] = M3d::Vec3(0.0);
+        m1[1] = M3d::Vec3(1.0);
+        m1[2] = M3d::Vec3(2.0);
+
+        // Make second matrix
+        M3d::Mat3 m2(m1);
+        m2[0] = M3d::Vec3(-1.0);
+
+        // Check not equal
+        CPPUNIT_ASSERT(m1 != m2);
+    }
+
+    /**
+     * Ensures `Mat3::operator!=` returns `true` for matrices with unequal second columns.
+     */
+    void testInequalityOperatorWithUnequalSecondColumns() {
+
+        // Make first matrix
+        M3d::Mat3 m1;
+        m1[0] = M3d::Vec3(0.0);
+        m1[1] = M3d::Vec3(1.0);
+        m1[2] = M3d::Vec3(2.0);
+
+        // Make second matrix
+        M3d::Mat3 m2(m1);
+        m2[1] = M3d::Vec3(-1.0);
+
+        // Check not equal
+        CPPUNIT_ASSERT(m1 != m2);
+    }
+
+    /**
+     * Ensures `Mat3::operator!=` returns `true` for matrices with unequal third columns.
+     */
+    void testInequalityOperatorWithUnequalThirdColumns() {
+
+        // Make first matrix
+        M3d::Mat3 m1;
+        m1[0] = M3d::Vec3(0.0);
+        m1[1] = M3d::Vec3(1.0);
+        m1[2] = M3d::Vec3(2.0);
+
+        // Make second matrix
+        M3d::Mat3 m2(m1);
+        m2[2] = M3d::Vec3(-1.0);
+
+        // Check not equal
+        CPPUNIT_ASSERT(m1 != m2);
     }
 
     /**
@@ -742,6 +876,10 @@ public:
     CPPUNIT_TEST_SUITE(Mat3Test);
     CPPUNIT_TEST(testCreateSignChart);
     CPPUNIT_TEST(testCreateMinorChart);
+    CPPUNIT_TEST(testEqualityOperatorWithEqualInstances);
+    CPPUNIT_TEST(testEqualityOperatorWithUnequalFirstColumns);
+    CPPUNIT_TEST(testEqualityOperatorWithUnequalSecondColumns);
+    CPPUNIT_TEST(testEqualityOperatorWithUnequalThirdColumns);
     CPPUNIT_TEST(testFromArrayInColumnMajorDoubleArray);
     CPPUNIT_TEST(testFromArrayInColumnMajorFloatArray);
     CPPUNIT_TEST(testFromArrayInColumnMajorDoubleArrayArray);
@@ -752,6 +890,10 @@ public:
     CPPUNIT_TEST(testFromArrayInRowMajorFloatArrayArray);
     CPPUNIT_TEST(testFromColumns);
     CPPUNIT_TEST(testFromRows);
+    CPPUNIT_TEST(testInequalityOperatorWithEqualInstances);
+    CPPUNIT_TEST(testInequalityOperatorWithUnequalFirstColumns);
+    CPPUNIT_TEST(testInequalityOperatorWithUnequalSecondColumns);
+    CPPUNIT_TEST(testInequalityOperatorWithUnequalThirdColumns);
     CPPUNIT_TEST(testInverse);
     CPPUNIT_TEST(testSetArray);
     CPPUNIT_TEST(testToArrayInColumnMajorDoubleArray);

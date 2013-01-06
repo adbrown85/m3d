@@ -66,6 +66,8 @@ public:
     Mat3 toMat3() const;
     std::string toString() const;
 // Operators
+    bool operator==(const Mat4& mat) const;
+    bool operator!=(const Mat4& mat) const;
     const Vec4& operator[](int j) const;
     Vec4& operator[](int j);
     Mat4 operator*(const Mat4& mat) const;

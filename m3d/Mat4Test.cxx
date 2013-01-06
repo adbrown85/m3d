@@ -317,6 +317,96 @@ public:
     }
 
     /**
+     * Ensures `Mat4::operator==` returns `true` for equal instances.
+     */
+    void testEqualityOperatorWithEqualInstances() {
+        double arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+        M3d::Mat4 m1 = Mat4::fromArrayInColumnMajor(arr);
+        M3d::Mat4 m2 = Mat4::fromArrayInColumnMajor(arr);
+        CPPUNIT_ASSERT(m1 == m2);
+    }
+
+    /**
+     * Ensures `Mat4::operator==` returns `false` for matrices with unequal first columns.
+     */
+    void testEqualityOperatorWithUnequalFirstColumns() {
+
+        // Make first matrix
+        M3d::Mat4 m1;
+        m1[0] = M3d::Vec4(0.0);
+        m1[1] = M3d::Vec4(1.0);
+        m1[2] = M3d::Vec4(2.0);
+        m1[3] = M3d::Vec4(3.0);
+
+        // Make second matrix
+        M3d::Mat4 m2(m1);
+        m1[0] = M3d::Vec4(-1);
+
+        // Check not equal
+        CPPUNIT_ASSERT(!(m1 == m2));
+    }
+
+    /**
+     * Ensures `Mat4::operator==` returns `false` for matrices with unequal second columns.
+     */
+    void testEqualityOperatorWithUnequalSecondColumns() {
+
+        // Make first matrix
+        M3d::Mat4 m1;
+        m1[0] = M3d::Vec4(0.0);
+        m1[1] = M3d::Vec4(1.0);
+        m1[2] = M3d::Vec4(2.0);
+        m1[3] = M3d::Vec4(3.0);
+
+        // Make second matrix
+        M3d::Mat4 m2(m1);
+        m1[1] = M3d::Vec4(-1);
+
+        // Check not equal
+        CPPUNIT_ASSERT(!(m1 == m2));
+    }
+
+    /**
+     * Ensures `Mat4::operator==` returns `false` for matrices with unequal third columns.
+     */
+    void testEqualityOperatorWithUnequalThirdColumns() {
+
+        // Make first matrix
+        M3d::Mat4 m1;
+        m1[0] = M3d::Vec4(0.0);
+        m1[1] = M3d::Vec4(1.0);
+        m1[2] = M3d::Vec4(2.0);
+        m1[3] = M3d::Vec4(3.0);
+
+        // Make second matrix
+        M3d::Mat4 m2(m1);
+        m1[2] = M3d::Vec4(-1);
+
+        // Check not equal
+        CPPUNIT_ASSERT(!(m1 == m2));
+    }
+
+    /**
+     * Ensures `Mat4::operator==` returns `false` for matrices with unequal fourth columns.
+     */
+    void testEqualityOperatorWithUnequalFourthColumns() {
+
+        // Make first matrix
+        M3d::Mat4 m1;
+        m1[0] = M3d::Vec4(0.0);
+        m1[1] = M3d::Vec4(1.0);
+        m1[2] = M3d::Vec4(2.0);
+        m1[3] = M3d::Vec4(3.0);
+
+        // Make second matrix
+        M3d::Mat4 m2(m1);
+        m1[3] = M3d::Vec4(-1);
+
+        // Check not equal
+        CPPUNIT_ASSERT(!(m1 == m2));
+    }
+
+    /**
      * Ensures fromArrayInColumnMajor works with a one-dimensional double array.
      */
     void testFromArrayInColumnMajorDoubleArray() {
@@ -652,6 +742,96 @@ public:
         CPPUNIT_ASSERT_EQUAL(14.0, mat[1][3]);
         CPPUNIT_ASSERT_EQUAL(15.0, mat[2][3]);
         CPPUNIT_ASSERT_EQUAL(16.0, mat[3][3]);
+    }
+
+    /**
+     * Ensures `Mat4::operator!=` returns `false` for equal instances.
+     */
+    void testInequalityOperatorWithEqualInstances() {
+        double arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+        M3d::Mat4 m1 = Mat4::fromArrayInColumnMajor(arr);
+        M3d::Mat4 m2 = Mat4::fromArrayInColumnMajor(arr);
+        CPPUNIT_ASSERT(!(m1 != m2));
+    }
+
+    /**
+     * Ensures `Mat4::operator!=` returns `true` for matrices with unequal first columns.
+     */
+    void testInequalityOperatorWithUnequalFirstColumns() {
+
+        // Make first matrix
+        M3d::Mat4 m1;
+        m1[0] = M3d::Vec4(0.0);
+        m1[1] = M3d::Vec4(1.0);
+        m1[2] = M3d::Vec4(2.0);
+        m1[3] = M3d::Vec4(3.0);
+
+        // Make second matrix
+        M3d::Mat4 m2(m1);
+        m1[0] = M3d::Vec4(-1);
+
+        // Check not equal
+        CPPUNIT_ASSERT(m1 != m2);
+    }
+
+    /**
+     * Ensures `Mat4::operator!=` returns `true` for matrices with unequal second columns.
+     */
+    void testInequalityOperatorWithUnequalSecondColumns() {
+
+        // Make first matrix
+        M3d::Mat4 m1;
+        m1[0] = M3d::Vec4(0.0);
+        m1[1] = M3d::Vec4(1.0);
+        m1[2] = M3d::Vec4(2.0);
+        m1[3] = M3d::Vec4(3.0);
+
+        // Make second matrix
+        M3d::Mat4 m2(m1);
+        m1[1] = M3d::Vec4(-1);
+
+        // Check not equal
+        CPPUNIT_ASSERT(m1 != m2);
+    }
+
+    /**
+     * Ensures `Mat4::operator!=` returns `true` for matrices with unequal third columns.
+     */
+    void testInequalityOperatorWithUnequalThirdColumns() {
+
+        // Make first matrix
+        M3d::Mat4 m1;
+        m1[0] = M3d::Vec4(0.0);
+        m1[1] = M3d::Vec4(1.0);
+        m1[2] = M3d::Vec4(2.0);
+        m1[3] = M3d::Vec4(3.0);
+
+        // Make second matrix
+        M3d::Mat4 m2(m1);
+        m1[2] = M3d::Vec4(-1);
+
+        // Check not equal
+        CPPUNIT_ASSERT(m1 != m2);
+    }
+
+    /**
+     * Ensures `Mat4::operator!=` returns `true` for matrices with unequal fourth columns.
+     */
+    void testInequalityOperatorWithUnequalFourthColumns() {
+
+        // Make first matrix
+        M3d::Mat4 m1;
+        m1[0] = M3d::Vec4(0.0);
+        m1[1] = M3d::Vec4(1.0);
+        m1[2] = M3d::Vec4(2.0);
+        m1[3] = M3d::Vec4(3.0);
+
+        // Make second matrix
+        M3d::Mat4 m2(m1);
+        m1[3] = M3d::Vec4(-1);
+
+        // Check not equal
+        CPPUNIT_ASSERT(m1 != m2);
     }
 
     /**
@@ -1076,6 +1256,11 @@ public:
     CPPUNIT_TEST(testCreateSignChart);
     CPPUNIT_TEST(testCreateMinorChart);
     CPPUNIT_TEST(testConstructorMat3);
+    CPPUNIT_TEST(testEqualityOperatorWithEqualInstances);
+    CPPUNIT_TEST(testEqualityOperatorWithUnequalFirstColumns);
+    CPPUNIT_TEST(testEqualityOperatorWithUnequalSecondColumns);
+    CPPUNIT_TEST(testEqualityOperatorWithUnequalThirdColumns);
+    CPPUNIT_TEST(testEqualityOperatorWithUnequalFourthColumns);
     CPPUNIT_TEST(testFromArrayInColumnMajorDoubleArray);
     CPPUNIT_TEST(testFromArrayInColumnMajorFloatArray);
     CPPUNIT_TEST(testFromArrayInColumnMajorDoubleArrayArray);
@@ -1086,6 +1271,11 @@ public:
     CPPUNIT_TEST(testFromArrayInRowMajorFloatArrayArray);
     CPPUNIT_TEST(testFromColumns);
     CPPUNIT_TEST(testFromRows);
+    CPPUNIT_TEST(testInequalityOperatorWithEqualInstances);
+    CPPUNIT_TEST(testInequalityOperatorWithUnequalFirstColumns);
+    CPPUNIT_TEST(testInequalityOperatorWithUnequalSecondColumns);
+    CPPUNIT_TEST(testInequalityOperatorWithUnequalThirdColumns);
+    CPPUNIT_TEST(testInequalityOperatorWithUnequalFourthColumns);
     CPPUNIT_TEST(testInverse);
     CPPUNIT_TEST(testSetArray);
     CPPUNIT_TEST(testToArrayInColumnMajorDoubleArray);
