@@ -1,3 +1,6 @@
+0.2
+ - Added equality operators to Mat3 and Mat4
+
 0.1.1
  - Fixed pkg-config file not using major version
 
