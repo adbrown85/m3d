@@ -1,3 +1,6 @@
+0.2.1
+ - Fixed Vec3::Vec3(double) not initializing fields
+
 0.2
  - Added equality operators to Mat3 and Mat4
 
