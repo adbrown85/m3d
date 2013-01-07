@@ -42,7 +42,7 @@ Vec3::Vec3() : x(0), y(0), z(0) {
  *
  * @param d Value to store in each component
  */
-Vec3::Vec3(double d) {
+Vec3::Vec3(double d) : x(d), y(d), z(d) {
     // pass
 }
 

@@ -333,6 +333,16 @@ public:
         CPPUNIT_ASSERT_EQUAL(6.0, r.z);
     }
 
+    /**
+     * Ensures `Vec3::Vec3(double)` works correctly.
+     */
+    void testVec3Double() {
+        Vec3 v(5);
+        CPPUNIT_ASSERT_EQUAL(5.0, v.x);
+        CPPUNIT_ASSERT_EQUAL(5.0, v.y);
+        CPPUNIT_ASSERT_EQUAL(5.0, v.z);
+    }
+
     CPPUNIT_TEST_SUITE(Vec3Test);
     CPPUNIT_TEST(testOperatorIndexConst);
     CPPUNIT_TEST(testToArray);
@@ -357,6 +367,7 @@ public:
     CPPUNIT_TEST(testNormalize);
     CPPUNIT_TEST(testMin);
     CPPUNIT_TEST(testMax);
+    CPPUNIT_TEST(testVec3Double);
     CPPUNIT_TEST_SUITE_END();
 };
 
