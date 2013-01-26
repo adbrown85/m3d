@@ -1,7 +1,7 @@
 Makefile
 aclocal.m4
 autom4te.cache/
-build/
+bin/
 config.guess
 config.h
 config.h.in
