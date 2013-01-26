@@ -26,7 +26,7 @@
 #include "config.h"
 #include <sstream>
 #include <stdexcept>
-#include "m3d/Vec3.hxx"
+#include "m3d/Vec3.h"
 using namespace std;
 namespace M3d {
 

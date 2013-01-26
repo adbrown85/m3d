@@ -28,7 +28,7 @@
 #include <iomanip>
 #include <sstream>
 #include <stdexcept>
-#include "m3d/Vec4.hxx"
+#include "m3d/Vec4.h"
 using namespace std;
 namespace M3d {
 

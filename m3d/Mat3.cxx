@@ -28,7 +28,7 @@
 #include <iomanip>
 #include <sstream>
 #include <stdexcept>
-#include "m3d/Mat3.hxx"
+#include "m3d/Mat3.h"
 using namespace std;
 namespace M3d {
 

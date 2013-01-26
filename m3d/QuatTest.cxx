@@ -30,8 +30,8 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/ui/text/TestRunner.h>
 #include "m3d/common.h"
-#include "m3d/Math.hxx"
-#include "m3d/Quat.hxx"
+#include "m3d/Math.h"
+#include "m3d/Quat.h"
 using namespace std;
 namespace M3d {
 

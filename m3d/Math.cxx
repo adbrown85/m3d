@@ -24,7 +24,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #include "config.h"
-#include "m3d/Math.hxx"
+#include "m3d/Math.h"
 using namespace std;
 namespace M3d {
 

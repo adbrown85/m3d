@@ -26,7 +26,7 @@
 #include "config.h"
 #include <algorithm>
 #include <stdexcept>
-#include "m3d/Quat.hxx"
+#include "m3d/Quat.h"
 using namespace std;
 namespace M3d {
 

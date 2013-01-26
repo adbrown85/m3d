@@ -29,7 +29,7 @@
 #include <cppunit/ui/text/TestRunner.h>
 #include <limits>
 #include "m3d/common.h"
-#include "m3d/Vec4.hxx"
+#include "m3d/Vec4.h"
 using namespace std;
 
 

@@ -28,7 +28,7 @@
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/ui/text/TestRunner.h>
-#include "m3d/Mat4.hxx"
+#include "m3d/Mat4.h"
 using namespace std;
 namespace M3d {
 

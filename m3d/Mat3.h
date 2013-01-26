@@ -23,11 +23,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef M3D_MAT3_HXX
-#define M3D_MAT3_HXX
+#ifndef M3D_MAT3_H
+#define M3D_MAT3_H
 #include <iostream>
 #include "m3d/common.h"
-#include "m3d/Vec3.hxx"
+#include "m3d/Vec3.h"
 namespace M3d {
 
 

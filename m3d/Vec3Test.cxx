@@ -28,8 +28,8 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/ui/text/TestRunner.h>
 #include "m3d/common.h"
-#include "m3d/Math.hxx"
-#include "m3d/Vec3.hxx"
+#include "m3d/Math.h"
+#include "m3d/Vec3.h"
 using namespace std;
 
 const double COS_FORTY_FIVE = cos(M3d::toRadians(45));

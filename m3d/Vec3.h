@@ -23,8 +23,8 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef M3D_VEC3_HXX
-#define M3D_VEC3_HXX
+#ifndef M3D_VEC3_H
+#define M3D_VEC3_H
 #include "m3d/common.h"
 #include <cmath>
 #include <iomanip>
