@@ -1,3 +1,10 @@
+0.3
+ - All headers use 'h' as extension
+ - Moved helper functions (e.g. `normalize`) to M3d namespace
+ - Added Vec4::toVec3
+ - Dependency files for tests only depend on headers
+ - Using 'bin' for build directory
+
 0.2.1
  - Fixed Vec3::Vec3(double) not initializing fields
 
