@@ -82,6 +82,15 @@ public:
     friend Vec3 normalize(const Vec3 &v);
 };
 
+Vec3 cross(const Vec3& u, const Vec3& v);
+double dot(const Vec3& u, const Vec3& v);
+double length(const Vec3 &v);
+Vec3 max(const Vec3 &u, const Vec3 &v);
+double max(const Vec3 &v);
+Vec3 min(const Vec3 &u, const Vec3 &v);
+double min(const Vec3 &v);
+Vec3 normalize(const Vec3 &v);
+
 } // namespace M3d
 
 std::ostream& operator<<(std::ostream &out, const M3d::Vec3 &u);

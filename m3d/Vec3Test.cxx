@@ -236,7 +236,7 @@ public:
 
         M3d::Vec3 u(1, 0, 0);
         M3d::Vec3 v(0, 1, 0);
-        M3d::Vec3 r = cross(u, v);
+        M3d::Vec3 r = M3d::cross(u, v);
 
         CPPUNIT_ASSERT_EQUAL(0.0, r.x);
         CPPUNIT_ASSERT_EQUAL(0.0, r.y);
@@ -250,7 +250,7 @@ public:
 
         M3d::Vec3 u(0, 1, 0);
         M3d::Vec3 v(1, 0, 0);
-        M3d::Vec3 r = cross(u, v);
+        M3d::Vec3 r = M3d::cross(u, v);
 
         CPPUNIT_ASSERT_EQUAL( 0.0, r.x);
         CPPUNIT_ASSERT_EQUAL( 0.0, r.y);
@@ -263,7 +263,7 @@ public:
     void testDotWithXY() {
         M3d::Vec3 u(1, 0, 0);
         M3d::Vec3 v(0, 1, 0);
-        double r = dot(u, v);
+        double r = M3d::dot(u, v);
 
         CPPUNIT_ASSERT_EQUAL(0.0, r);
     }
@@ -275,7 +275,7 @@ public:
 
         M3d::Vec3 u(0, 1, 0);
         M3d::Vec3 v(0, 1, 0);
-        double r = dot(u, v);
+        double r = M3d::dot(u, v);
 
         CPPUNIT_ASSERT_EQUAL(1.0, r);
     }
@@ -286,7 +286,7 @@ public:
     void testLength() {
 
         M3d::Vec3 u(5, 5, 0);
-        double r = length(u);
+        double r = M3d::length(u);
 
         CPPUNIT_ASSERT_DOUBLES_EQUAL(5 * M3d::SQRT_TWO, r, 0.01);
     }
@@ -297,7 +297,7 @@ public:
     void testNormalize() {
 
         M3d::Vec3 u(5, 5, 0);
-        M3d::Vec3 r = normalize(u);
+        M3d::Vec3 r = M3d::normalize(u);
 
         CPPUNIT_ASSERT_DOUBLES_EQUAL(COS_FORTY_FIVE, r.x, 0.01);
         CPPUNIT_ASSERT_DOUBLES_EQUAL(SIN_FORTY_FIVE, r.y, 0.01);
@@ -311,7 +311,7 @@ public:
 
         M3d::Vec3 u(1, 5, 3);
         M3d::Vec3 v(4, 2, 6);
-        M3d::Vec3 r = min(u, v);
+        M3d::Vec3 r = M3d::min(u, v);
 
         CPPUNIT_ASSERT_EQUAL(1.0, r.x);
         CPPUNIT_ASSERT_EQUAL(2.0, r.y);
@@ -325,7 +325,7 @@ public:
 
         M3d::Vec3 u(1, 5, 3);
         M3d::Vec3 v(4, 2, 6);
-        M3d::Vec3 r = max(u, v);
+        M3d::Vec3 r = M3d::max(u, v);
 
         CPPUNIT_ASSERT_EQUAL(4.0, r.x);
         CPPUNIT_ASSERT_EQUAL(5.0, r.y);

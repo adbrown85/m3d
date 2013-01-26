@@ -81,6 +81,14 @@ public:
     friend Vec4 normalize(const Vec4 &v);
 };
 
+double dot(const Vec4& u, const Vec4 &v);
+double length(const Vec4 &v);
+double min(const Vec4 &v);
+Vec4 min(const Vec4 &u, const Vec4 &v);
+double max(const Vec4 &v);
+Vec4 max(const Vec4 &u, const Vec4 &v);
+Vec4 normalize(const Vec4 &v);
+
 } // namespace M3d
 
 std::ostream& operator<<(std::ostream& out, const M3d::Vec4& u);
