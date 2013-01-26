@@ -31,10 +31,9 @@
 #include "m3d/Math.hxx"
 #include "m3d/Vec3.hxx"
 using namespace std;
-namespace M3d {
 
-const double COS_FORTY_FIVE = cos(toRadians(45));
-const double SIN_FORTY_FIVE = sin(toRadians(45));
+const double COS_FORTY_FIVE = cos(M3d::toRadians(45));
+const double SIN_FORTY_FIVE = sin(M3d::toRadians(45));
 
 /**
  * Unit test for Vec3.
@@ -47,7 +46,7 @@ public:
      */
     void testOperatorIndexConst() {
 
-        Vec3 u(1, 2, 3);
+        M3d::Vec3 u(1, 2, 3);
 
         CPPUNIT_ASSERT_EQUAL(1.0, u[0]);
         CPPUNIT_ASSERT_EQUAL(2.0, u[1]);
@@ -59,7 +58,7 @@ public:
      */
     void testToArray() {
 
-        Vec3 u(1, 2, 3);
+        M3d::Vec3 u(1, 2, 3);
         double arr[3];
 
         u.toArray(arr);
@@ -73,8 +72,8 @@ public:
      */
     void testOperatorEqualsWithTrue() {
 
-        Vec3 u(1, 2, 3);
-        Vec3 v(1, 2, 3);
+        M3d::Vec3 u(1, 2, 3);
+        M3d::Vec3 v(1, 2, 3);
 
         CPPUNIT_ASSERT_EQUAL(true, u == v);
     }
@@ -83,8 +82,8 @@ public:
      * Ensures operator== returns false when it should.
      */
     void testOperatorEqualsWithFalse() {
-        Vec3 u(1, 2, 3);
-        Vec3 v(4, 5, 6);
+        M3d::Vec3 u(1, 2, 3);
+        M3d::Vec3 v(4, 5, 6);
 
         CPPUNIT_ASSERT_EQUAL(u == v, false);
     }
@@ -94,8 +93,8 @@ public:
      */
     void testOperatorNotEqualsWithTrue() {
 
-        Vec3 u(1, 1, 1);
-        Vec3 v(1, 1, 2);
+        M3d::Vec3 u(1, 1, 1);
+        M3d::Vec3 v(1, 1, 2);
 
         CPPUNIT_ASSERT_EQUAL(true, u != v);
     }
@@ -104,8 +103,8 @@ public:
      * Ensures operator!= returns false when it should
      */
     void testOperatorNotEqualsWithFalse() {
-        Vec3 u(1, 1, 1);
-        Vec3 v(1, 1, 1);
+        M3d::Vec3 u(1, 1, 1);
+        M3d::Vec3 v(1, 1, 1);
 
         CPPUNIT_ASSERT_EQUAL(u != v, false);
     }
@@ -114,9 +113,9 @@ public:
      * Ensures operator+(Vec3,Vec3) works correctly.
      */
     void testOperatorAddVec3Vec3() {
-        Vec3 u(1, 2, 3);
-        Vec3 v(4, 5, 6);
-        Vec3 r = u + v;
+        M3d::Vec3 u(1, 2, 3);
+        M3d::Vec3 v(4, 5, 6);
+        M3d::Vec3 r = u + v;
 
         CPPUNIT_ASSERT_EQUAL(5.0, r.x);
         CPPUNIT_ASSERT_EQUAL(7.0, r.y);
@@ -128,9 +127,9 @@ public:
      */
     void testOperatorSubtractVec3Vec3() {
 
-        Vec3 u(1, 2, 3);
-        Vec3 v(6, 5, 4);
-        Vec3 r = u - v;
+        M3d::Vec3 u(1, 2, 3);
+        M3d::Vec3 v(6, 5, 4);
+        M3d::Vec3 r = u - v;
 
         CPPUNIT_ASSERT_EQUAL(-5.0, r.x);
         CPPUNIT_ASSERT_EQUAL(-3.0, r.y);
@@ -142,9 +141,9 @@ public:
      */
     void testOperatorMultiplyVec3Vec3() {
 
-        Vec3 u(1, 2, 3);
-        Vec3 v(4, 5, 6);
-        Vec3 r = u * v;
+        M3d::Vec3 u(1, 2, 3);
+        M3d::Vec3 v(4, 5, 6);
+        M3d::Vec3 r = u * v;
 
         CPPUNIT_ASSERT_EQUAL( 4.0, r.x);
         CPPUNIT_ASSERT_EQUAL(10.0, r.y);
@@ -156,9 +155,9 @@ public:
      */
     void testOperatorDivideVec3Vec3() {
 
-        Vec3 u(1, 2, 3);
-        Vec3 v(4, 5, 6);
-        Vec3 r = u / v;
+        M3d::Vec3 u(1, 2, 3);
+        M3d::Vec3 v(4, 5, 6);
+        M3d::Vec3 r = u / v;
 
         CPPUNIT_ASSERT_EQUAL(0.25, r.x);
         CPPUNIT_ASSERT_EQUAL(0.40, r.y);
@@ -170,8 +169,8 @@ public:
      */
     void testOperatorAddVec3Float() {
 
-        Vec3 u(1, 2, 3);
-        Vec3 r = u + 4;
+        M3d::Vec3 u(1, 2, 3);
+        M3d::Vec3 r = u + 4;
 
         CPPUNIT_ASSERT_EQUAL(5.0, r.x);
         CPPUNIT_ASSERT_EQUAL(6.0, r.y);
@@ -183,8 +182,8 @@ public:
      */
     void testOperatorSubtractVec3Float() {
 
-        Vec3 u(1, 2, 3);
-        Vec3 r = u - 4;
+        M3d::Vec3 u(1, 2, 3);
+        M3d::Vec3 r = u - 4;
 
         CPPUNIT_ASSERT_EQUAL(-3.0, r.x);
         CPPUNIT_ASSERT_EQUAL(-2.0, r.y);
@@ -196,8 +195,8 @@ public:
      */
     void testOperatorMultiplyVec3Float() {
 
-        Vec3 u(1, 2, 3);
-        Vec3 r = u * 4;
+        M3d::Vec3 u(1, 2, 3);
+        M3d::Vec3 r = u * 4;
 
         CPPUNIT_ASSERT_EQUAL( 4.0, r.x);
         CPPUNIT_ASSERT_EQUAL( 8.0, r.y);
@@ -209,8 +208,8 @@ public:
      */
     void testOperatorDivideVec3Float() {
 
-        Vec3 u(1, 2, 3);
-        Vec3 r = u / 4;
+        M3d::Vec3 u(1, 2, 3);
+        M3d::Vec3 r = u / 4;
 
         CPPUNIT_ASSERT_EQUAL(0.25, r.x);
         CPPUNIT_ASSERT_EQUAL(0.50, r.y);
@@ -222,8 +221,8 @@ public:
      */
     void testOperatorUnaryPlus() {
 
-        Vec3 v1(1, 2, 3);
-        Vec3 v2 = +v1;
+        M3d::Vec3 v1(1, 2, 3);
+        M3d::Vec3 v2 = +v1;
 
         CPPUNIT_ASSERT_EQUAL(1.0, v2.x);
         CPPUNIT_ASSERT_EQUAL(2.0, v2.y);
@@ -235,9 +234,9 @@ public:
      */
     void testCrossWithXY() {
 
-        Vec3 u(1, 0, 0);
-        Vec3 v(0, 1, 0);
-        Vec3 r = cross(u, v);
+        M3d::Vec3 u(1, 0, 0);
+        M3d::Vec3 v(0, 1, 0);
+        M3d::Vec3 r = cross(u, v);
 
         CPPUNIT_ASSERT_EQUAL(0.0, r.x);
         CPPUNIT_ASSERT_EQUAL(0.0, r.y);
@@ -249,9 +248,9 @@ public:
      */
     void testCrossWithYX() {
 
-        Vec3 u(0, 1, 0);
-        Vec3 v(1, 0, 0);
-        Vec3 r = cross(u, v);
+        M3d::Vec3 u(0, 1, 0);
+        M3d::Vec3 v(1, 0, 0);
+        M3d::Vec3 r = cross(u, v);
 
         CPPUNIT_ASSERT_EQUAL( 0.0, r.x);
         CPPUNIT_ASSERT_EQUAL( 0.0, r.y);
@@ -262,8 +261,8 @@ public:
      * Ensures dot works correctly with the X and Y axes.
      */
     void testDotWithXY() {
-        Vec3 u(1, 0, 0);
-        Vec3 v(0, 1, 0);
+        M3d::Vec3 u(1, 0, 0);
+        M3d::Vec3 v(0, 1, 0);
         double r = dot(u, v);
 
         CPPUNIT_ASSERT_EQUAL(0.0, r);
@@ -274,8 +273,8 @@ public:
      */
     void testDotWithYY() {
 
-        Vec3 u(0, 1, 0);
-        Vec3 v(0, 1, 0);
+        M3d::Vec3 u(0, 1, 0);
+        M3d::Vec3 v(0, 1, 0);
         double r = dot(u, v);
 
         CPPUNIT_ASSERT_EQUAL(1.0, r);
@@ -286,10 +285,10 @@ public:
      */
     void testLength() {
 
-        Vec3 u(5, 5, 0);
+        M3d::Vec3 u(5, 5, 0);
         double r = length(u);
 
-        CPPUNIT_ASSERT_DOUBLES_EQUAL(5 * SQRT_TWO, r, 0.01);
+        CPPUNIT_ASSERT_DOUBLES_EQUAL(5 * M3d::SQRT_TWO, r, 0.01);
     }
 
     /**
@@ -297,8 +296,8 @@ public:
      */
     void testNormalize() {
 
-        Vec3 u(5, 5, 0);
-        Vec3 r = normalize(u);
+        M3d::Vec3 u(5, 5, 0);
+        M3d::Vec3 r = normalize(u);
 
         CPPUNIT_ASSERT_DOUBLES_EQUAL(COS_FORTY_FIVE, r.x, 0.01);
         CPPUNIT_ASSERT_DOUBLES_EQUAL(SIN_FORTY_FIVE, r.y, 0.01);
@@ -310,9 +309,9 @@ public:
      */
     void testMin() {
 
-        Vec3 u(1, 5, 3);
-        Vec3 v(4, 2, 6);
-        Vec3 r = min(u, v);
+        M3d::Vec3 u(1, 5, 3);
+        M3d::Vec3 v(4, 2, 6);
+        M3d::Vec3 r = min(u, v);
 
         CPPUNIT_ASSERT_EQUAL(1.0, r.x);
         CPPUNIT_ASSERT_EQUAL(2.0, r.y);
@@ -324,9 +323,9 @@ public:
      */
     void testMax() {
 
-        Vec3 u(1, 5, 3);
-        Vec3 v(4, 2, 6);
-        Vec3 r = max(u, v);
+        M3d::Vec3 u(1, 5, 3);
+        M3d::Vec3 v(4, 2, 6);
+        M3d::Vec3 r = max(u, v);
 
         CPPUNIT_ASSERT_EQUAL(4.0, r.x);
         CPPUNIT_ASSERT_EQUAL(5.0, r.y);
@@ -337,7 +336,7 @@ public:
      * Ensures `Vec3::Vec3(double)` works correctly.
      */
     void testVec3Double() {
-        Vec3 v(5);
+        M3d::Vec3 v(5);
         CPPUNIT_ASSERT_EQUAL(5.0, v.x);
         CPPUNIT_ASSERT_EQUAL(5.0, v.y);
         CPPUNIT_ASSERT_EQUAL(5.0, v.z);
@@ -371,11 +370,9 @@ public:
     CPPUNIT_TEST_SUITE_END();
 };
 
-} /* namespace M3d */
-
 int main(int argc, char *argv[]) {
     CppUnit::TextUi::TestRunner runner;
-    runner.addTest(M3d::Vec3Test::suite());
+    runner.addTest(Vec3Test::suite());
     runner.run();
     return 0;
 }

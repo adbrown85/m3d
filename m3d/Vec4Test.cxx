@@ -31,7 +31,6 @@
 #include "m3d/common.h"
 #include "m3d/Vec4.hxx"
 using namespace std;
-namespace M3d {
 
 
 /**
@@ -44,9 +43,9 @@ public:
      * Ensures add operation works correctly.
      */
     void testAdd() {
-        Vec4 A(2, 2, 2, 0);
-        Vec4 B(2, 4, 5, 0);
-        Vec4 C = A + B;
+        M3d::Vec4 A(2, 2, 2, 0);
+        M3d::Vec4 B(2, 4, 5, 0);
+        M3d::Vec4 C = A + B;
         CPPUNIT_ASSERT_EQUAL(4.0, C.x);
         CPPUNIT_ASSERT_EQUAL(6.0, C.y);
         CPPUNIT_ASSERT_EQUAL(7.0, C.z);
@@ -57,9 +56,9 @@ public:
      * Ensures subtract operation works correctly.
      */
     void testSubtract() {
-        Vec4 A(2, 2, 2, 0);
-        Vec4 B(2, 4, 5, 0);
-        Vec4 C = A - B;
+        M3d::Vec4 A(2, 2, 2, 0);
+        M3d::Vec4 B(2, 4, 5, 0);
+        M3d::Vec4 C = A - B;
         CPPUNIT_ASSERT_EQUAL( 0.0, C.x);
         CPPUNIT_ASSERT_EQUAL(-2.0, C.y);
         CPPUNIT_ASSERT_EQUAL(-3.0, C.z);
@@ -70,9 +69,9 @@ public:
      * Ensures multiply operation works correctly.
      */
     void testMultiply() {
-        Vec4 A(2, 2, 2, 0);
-        Vec4 B(2, 4, 5, 0);
-        Vec4 C = A * B;
+        M3d::Vec4 A(2, 2, 2, 0);
+        M3d::Vec4 B(2, 4, 5, 0);
+        M3d::Vec4 C = A * B;
         CPPUNIT_ASSERT_EQUAL( 4.0, C.x);
         CPPUNIT_ASSERT_EQUAL( 8.0, C.y);
         CPPUNIT_ASSERT_EQUAL(10.0, C.z);
@@ -83,9 +82,9 @@ public:
      * Ensures divide operation works correctly.
      */
     void testDivide() {
-        Vec4 A(2, 2, 2, 0);
-        Vec4 B(2, 4, 5, 0);
-        Vec4 C = A / B;
+        M3d::Vec4 A(2, 2, 2, 0);
+        M3d::Vec4 B(2, 4, 5, 0);
+        M3d::Vec4 C = A / B;
         CPPUNIT_ASSERT_EQUAL(1.0, C.x);
         CPPUNIT_ASSERT_EQUAL(0.5, C.y);
         CPPUNIT_ASSERT_EQUAL(0.4, C.z);
@@ -97,8 +96,8 @@ public:
      */
     void testOperatorUnaryPlus() {
 
-        Vec4 v1(1, 2, 3, 4);
-        Vec4 v2 = +v1;
+        M3d::Vec4 v1(1, 2, 3, 4);
+        M3d::Vec4 v2 = +v1;
 
         CPPUNIT_ASSERT_EQUAL(1.0, v1.x);
         CPPUNIT_ASSERT_EQUAL(2.0, v1.y);
@@ -115,11 +114,9 @@ public:
     CPPUNIT_TEST_SUITE_END();
 };
 
-} /* namespace M3d */
-
 int main(int argc, char *argv[]) {
     CppUnit::TextUi::TestRunner runner;
-    runner.addTest(M3d::Vec4Test::suite());
+    runner.addTest(Vec4Test::suite());
     runner.run();
     return 0;
 }
