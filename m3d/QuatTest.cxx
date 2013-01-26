@@ -33,13 +33,12 @@
 #include "m3d/Math.h"
 #include "m3d/Quat.h"
 using namespace std;
-namespace M3d {
 
 /*
  * Constants
  */
-const float ANGLE_30 = toRadians(30);
-const float ANGLE_45 = toRadians(45);
+const float ANGLE_30 = M3d::toRadians(30);
+const float ANGLE_45 = M3d::toRadians(45);
 const float TOLERANCE = 1e-3;
 const float NOT_A_NUMBER = sqrt(-1);
 
@@ -58,7 +57,7 @@ private:
      * | 0  sin(t)  cos(t) |
      * </pre>
      */
-    static Mat3 createRotationMatrixX(const double t) {
+    static M3d::Mat3 createRotationMatrixX(const double t) {
 
         // Calculate sin and cosine
         const double sin_t = sin(t);
@@ -71,7 +70,7 @@ private:
         a[2][0] = 0; a[2][1] = sin_t; a[2][2] = cos_t;
 
         // Make matrix
-        return Mat3::fromArrayInColumnMajor(a);
+        return M3d::Mat3::fromArrayInColumnMajor(a);
     }
 
     /**
@@ -81,7 +80,7 @@ private:
      * |    0    1    0    |
      * | -sin(t) 0  cos(t) |
      */
-    static Mat3 createRotationMatrixY(const double t) {
+    static M3d::Mat3 createRotationMatrixY(const double t) {
 
         // Calculate sin and cosine
         const double sin_t = sin(t);
@@ -94,7 +93,7 @@ private:
         a[2][0] = -sin_t; a[2][1] = 0; a[2][2] = cos_t;
 
         // Make matrix
-        return Mat3::fromArrayInColumnMajor(a);
+        return M3d::Mat3::fromArrayInColumnMajor(a);
     }
 
     /**
@@ -104,7 +103,7 @@ private:
      * | sin(t)  cos(t) 0 |
      * |   0       0    1 |
      */
-    static Mat3 createRotationMatrixZ(const double t) {
+    static M3d::Mat3 createRotationMatrixZ(const double t) {
 
         // Calculate sin and cosine
         const double sin_t = sin(t);
@@ -117,7 +116,7 @@ private:
         a[2][0] =     0; a[2][1] =      0; a[2][2] = 1;
 
         // Make matrix
-        return Mat3::fromArrayInColumnMajor(a);
+        return M3d::Mat3::fromArrayInColumnMajor(a);
     }
 
 public:
@@ -126,7 +125,7 @@ public:
      * Ensures the default constructor makes a quaternion with all zeros.
      */
     void testDefaultConstructor() {
-        Quat q;
+        M3d::Quat q;
         CPPUNIT_ASSERT(q.x == 0.0);
         CPPUNIT_ASSERT(q.y == 0.0);
         CPPUNIT_ASSERT(q.z == 0.0);
@@ -137,7 +136,7 @@ public:
      * Ensures the constructor taking explicit values works correctly.
      */
     void testConstructorWithExplicitValues() {
-        Quat q(1, 2, 3, 4);
+        M3d::Quat q(1, 2, 3, 4);
         CPPUNIT_ASSERT_EQUAL(1, (int) q.x);
         CPPUNIT_ASSERT_EQUAL(2, (int) q.y);
         CPPUNIT_ASSERT_EQUAL(3, (int) q.z);
@@ -148,8 +147,8 @@ public:
      * Ensures fromMat3 works correctly with the identity matrix.
      */
     void testFromMat3WithIdentity() {
-        const Mat3 m(1);
-        const Quat q = Quat::fromMat3(m);
+        const M3d::Mat3 m(1);
+        const M3d::Quat q = M3d::Quat::fromMat3(m);
         CPPUNIT_ASSERT_DOUBLES_EQUAL(0, q.x, TOLERANCE);
         CPPUNIT_ASSERT_DOUBLES_EQUAL(0, q.y, TOLERANCE);
         CPPUNIT_ASSERT_DOUBLES_EQUAL(0, q.z, TOLERANCE);
@@ -162,13 +161,13 @@ public:
     void testFromMat3WithRotationX() {
 
         // Make expected quaternion
-        const Vec3 axis(1, 0, 0);
+        const M3d::Vec3 axis(1, 0, 0);
         const double angle = ANGLE_30;
-        const Quat expect = Quat::fromAxisAngle(axis, angle);
+        const M3d::Quat expect = M3d::Quat::fromAxisAngle(axis, angle);
 
         // Make input matrix
-        const Mat3 m = createRotationMatrixX(angle);
-        const Quat result = Quat::fromMat3(m);
+        const M3d::Mat3 m = createRotationMatrixX(angle);
+        const M3d::Quat result = M3d::Quat::fromMat3(m);
 
         // Compare
         CPPUNIT_ASSERT_DOUBLES_EQUAL(expect.x, result.x, TOLERANCE);
@@ -183,13 +182,13 @@ public:
     void testFromMat3WithRotationY() {
 
         // Make expected quaternion
-        const Vec3 axis(0, 1, 0);
+        const M3d::Vec3 axis(0, 1, 0);
         const double angle = ANGLE_30;
-        const Quat expect = Quat::fromAxisAngle(axis, angle);
+        const M3d::Quat expect = M3d::Quat::fromAxisAngle(axis, angle);
 
         // Make input matrix
-        const Mat3 m = createRotationMatrixY(angle);
-        const Quat result = Quat::fromMat3(m);
+        const M3d::Mat3 m = createRotationMatrixY(angle);
+        const M3d::Quat result = M3d::Quat::fromMat3(m);
 
         // Compare
         CPPUNIT_ASSERT_DOUBLES_EQUAL(expect.x, result.x, TOLERANCE);
@@ -204,13 +203,13 @@ public:
     void testFromMat3WithRotationZ() {
 
         // Make expected quaternion
-        const Vec3 axis(0, 0, 1);
+        const M3d::Vec3 axis(0, 0, 1);
         const double angle = ANGLE_30;
-        const Quat expect = Quat::fromAxisAngle(axis, angle);
+        const M3d::Quat expect = M3d::Quat::fromAxisAngle(axis, angle);
 
         // Make input matrix
-        const Mat3 m = createRotationMatrixZ(angle);
-        const Quat result = Quat::fromMat3(m);
+        const M3d::Mat3 m = createRotationMatrixZ(angle);
+        const M3d::Quat result = M3d::Quat::fromMat3(m);
 
         // Compare
         CPPUNIT_ASSERT_DOUBLES_EQUAL(expect.x, result.x, TOLERANCE);
@@ -225,13 +224,13 @@ public:
     void testFromMat3WithOneEightyDegreeRotation() {
 
         // Make expected quaternion
-        const Vec3 axis(0, 1, 0);
-        const double angle = toRadians(180);
-        const Quat expect = Quat::fromAxisAngle(axis, angle);
+        const M3d::Vec3 axis(0, 1, 0);
+        const double angle = M3d::toRadians(180);
+        const M3d::Quat expect = M3d::Quat::fromAxisAngle(axis, angle);
 
         // Make result quaternion
-        const Mat3 m = createRotationMatrixY(angle);
-        const Quat result = Quat::fromMat3(m);
+        const M3d::Mat3 m = createRotationMatrixY(angle);
+        const M3d::Quat result = M3d::Quat::fromMat3(m);
 
         // Compare
         CPPUNIT_ASSERT_DOUBLES_EQUAL(expect.x, result.x, TOLERANCE);
@@ -244,7 +243,7 @@ public:
      * Ensures the named constructor creating the identity quaternion works correctly.
      */
     void testIdentity() {
-        Quat q = Quat::identity();
+        M3d::Quat q = M3d::Quat::identity();
         CPPUNIT_ASSERT_DOUBLES_EQUAL(0, q.x, TOLERANCE);
         CPPUNIT_ASSERT_DOUBLES_EQUAL(0, q.y, TOLERANCE);
         CPPUNIT_ASSERT_DOUBLES_EQUAL(0, q.z, TOLERANCE);
@@ -255,7 +254,7 @@ public:
      * Ensures isIdentity works correctly with the identity quaternion.
      */
     void testIsIdentityWithIdentity() {
-        Quat q(0, 0, 0, 1);
+        M3d::Quat q(0, 0, 0, 1);
         CPPUNIT_ASSERT(q.isIdentity());
     }
 
@@ -263,7 +262,7 @@ public:
      * Ensures isIdentity works correctly with an incorrect x component.
      */
     void testIsIdentityWithIncorrectX() {
-        Quat q(-1, 0, 0, 1);
+        M3d::Quat q(-1, 0, 0, 1);
         CPPUNIT_ASSERT(!q.isIdentity());
     }
 
@@ -271,7 +270,7 @@ public:
      * Ensures isIdentity works correctly with an incorrect y component.
      */
     void testIsIdentityWithIncorrectY() {
-        Quat q(0, -1, 0, 1);
+        M3d::Quat q(0, -1, 0, 1);
         CPPUNIT_ASSERT(!q.isIdentity());
     }
 
@@ -279,7 +278,7 @@ public:
      * Ensures isIdentity works correctly with an incorrect z component.
      */
     void testIsIdentityWithIncorrectZ() {
-        Quat q(0, 0, -1, 1);
+        M3d::Quat q(0, 0, -1, 1);
         CPPUNIT_ASSERT(!q.isIdentity());
     }
 
@@ -287,7 +286,7 @@ public:
      * Ensures isIdentity works correctly with an incorrect w component.
      */
     void testIsIdentityWithIncorrectW() {
-        Quat q(0, 0, 0, -1);
+        M3d::Quat q(0, 0, 0, -1);
         CPPUNIT_ASSERT(!q.isIdentity());
     }
 
@@ -295,7 +294,7 @@ public:
      * Ensures isInfinite works correctly when its x component is infinite.
      */
     void testIsInfiniteWithInfiniteX() {
-        Quat q;
+        M3d::Quat q;
         q.x = +numeric_limits<double>::infinity();
         CPPUNIT_ASSERT(q.isInfinite());
         q.x = -numeric_limits<double>::infinity();
@@ -306,7 +305,7 @@ public:
      * Ensures isInfinite works correctly when its y component is infinite.
      */
     void testIsInfiniteWithInfiniteY() {
-        Quat q;
+        M3d::Quat q;
         q.y = +numeric_limits<double>::infinity();
         CPPUNIT_ASSERT(q.isInfinite());
         q.y = -numeric_limits<double>::infinity();
@@ -317,7 +316,7 @@ public:
      * Ensures isInfinite works correctly when its z component is infinite.
      */
     void testIsInfiniteWithInfiniteZ() {
-        Quat q;
+        M3d::Quat q;
         q.z = +numeric_limits<double>::infinity();
         CPPUNIT_ASSERT(q.isInfinite());
         q.z = -numeric_limits<double>::infinity();
@@ -328,7 +327,7 @@ public:
      * Ensures isInfinite works correctly when its w component is infinite.
      */
     void testIsInfiniteWithInfiniteW() {
-        Quat q;
+        M3d::Quat q;
         q.w = +numeric_limits<double>::infinity();
         CPPUNIT_ASSERT(q.isInfinite());
         q.w = -numeric_limits<double>::infinity();
@@ -339,7 +338,7 @@ public:
      * Ensures isInfinite works correctly with finite components.
      */
     void testIsInfiniteWithFinite() {
-        Quat q;
+        M3d::Quat q;
         CPPUNIT_ASSERT(!q.isInfinite());
     }
 
@@ -347,7 +346,7 @@ public:
      * Ensures isNaN works correctly when its x component is NaN.
      */
     void testIsNanWithNanX() {
-        Quat q;
+        M3d::Quat q;
         q.x = NOT_A_NUMBER;
         CPPUNIT_ASSERT(q.isNaN());
     }
@@ -356,7 +355,7 @@ public:
      * Ensures isNaN works correctly when its x component is NaN.
      */
     void testIsNanWithNanY() {
-        Quat q;
+        M3d::Quat q;
         q.y = NOT_A_NUMBER;
         CPPUNIT_ASSERT(q.isNaN());
     }
@@ -365,7 +364,7 @@ public:
      * Ensures isNaN works correctly when its x component is NaN.
      */
     void testIsNanWithNanZ() {
-        Quat q;
+        M3d::Quat q;
         q.z = NOT_A_NUMBER;
         CPPUNIT_ASSERT(q.isNaN());
     }
@@ -374,7 +373,7 @@ public:
      * Ensures isNaN works correctly when its w components is NaN.
      */
     void testIsNanWithNanW() {
-        Quat q;
+        M3d::Quat q;
         q.w = NOT_A_NUMBER;
         CPPUNIT_ASSERT(q.isNaN());
     }
@@ -383,7 +382,7 @@ public:
      * Ensures isNaN worls correctly when none of its components is NaN.
      */
     void testIsNanWithoutNan() {
-        Quat q;
+        M3d::Quat q;
         CPPUNIT_ASSERT(!q.isNaN());
     }
 
@@ -391,8 +390,8 @@ public:
      * Ensure the equals operator works correctly with two equal quaternions.
      */
     void testOperatorEqualsWithEqual() {
-        const Quat q1 = Quat(1, 2, 3, 4);
-        const Quat q2 = Quat(1, 2, 3, 4);
+        const M3d::Quat q1 = M3d::Quat(1, 2, 3, 4);
+        const M3d::Quat q2 = M3d::Quat(1, 2, 3, 4);
         CPPUNIT_ASSERT(q1 == q2);
     }
 
@@ -400,8 +399,8 @@ public:
      * Ensures the equals operator works with two unequal quaternions.
      */
     void testOperatorEqualsWithUnequal() {
-        const Quat q1 = Quat(1, 2, 3, 4);
-        const Quat q2 = Quat(4, 3, 2, 1);
+        const M3d::Quat q1 = M3d::Quat(1, 2, 3, 4);
+        const M3d::Quat q2 = M3d::Quat(4, 3, 2, 1);
         CPPUNIT_ASSERT(!(q1 == q2));
     }
 
@@ -409,8 +408,8 @@ public:
      * Ensures the not-equal operator works with equal quaternions.
      */
     void testOperatorNotEqualWithEqual() {
-        const Quat q1(1, 2, 3, 4);
-        const Quat q2(1, 2, 3, 4);
+        const M3d::Quat q1(1, 2, 3, 4);
+        const M3d::Quat q2(1, 2, 3, 4);
         CPPUNIT_ASSERT(!(q1 != q2));
     }
 
@@ -418,8 +417,8 @@ public:
      * Ensures the not-equal operator works with unequal quaternions.
      */
     void testOperatorNotEqualWithUnequal() {
-        const Quat q1(1, 2, 3, 4);
-        const Quat q2(4, 3, 2, 1);
+        const M3d::Quat q1(1, 2, 3, 4);
+        const M3d::Quat q2(4, 3, 2, 1);
         CPPUNIT_ASSERT(q1 != q2);
     }
 
@@ -427,7 +426,7 @@ public:
      * Ensures the subscript operator works correctly.
      */
     void testOperatorSubscript() {
-        Quat q;
+        M3d::Quat q;
         q[0] = 1;
         q[1] = 2;
         q[2] = 3;
@@ -444,7 +443,7 @@ public:
      * Ensures the const subscript operator works correctly.
      */
     void testOperatorSubscriptConst() {
-        const Quat q(1, 2, 3, 4);
+        const M3d::Quat q(1, 2, 3, 4);
         CPPUNIT_ASSERT_DOUBLES_EQUAL(1.0, q[0], TOLERANCE);
         CPPUNIT_ASSERT_DOUBLES_EQUAL(2.0, q[1], TOLERANCE);
         CPPUNIT_ASSERT_DOUBLES_EQUAL(3.0, q[2], TOLERANCE);
@@ -459,8 +458,8 @@ public:
     void testOperatorUnaryPlus() {
 
         // Make quaternion
-        const Quat q1(1, 2, 3, 4);
-        const Quat q2 = +q1;
+        const M3d::Quat q1(1, 2, 3, 4);
+        const M3d::Quat q2 = +q1;
 
         // Compare results
         CPPUNIT_ASSERT_DOUBLES_EQUAL(1, q2.x, TOLERANCE);
@@ -475,8 +474,8 @@ public:
     void testOperatorUnaryMinus() {
 
         // Make quaternion and negate it
-        const Quat q1(1, 2, 3, 4);
-        const Quat q2 = -q1;
+        const M3d::Quat q1(1, 2, 3, 4);
+        const M3d::Quat q2 = -q1;
 
         // Compare results
         CPPUNIT_ASSERT_DOUBLES_EQUAL(-1, q2.x, TOLERANCE);
@@ -491,9 +490,9 @@ public:
     void testOperatorAdd() {
 
         // Add the quaternions
-        const Quat q1(1, 2, 3, 4);
-        const Quat q2(11, 22, 33, 44);
-        const Quat q3 = q1 + q2;
+        const M3d::Quat q1(1, 2, 3, 4);
+        const M3d::Quat q2(11, 22, 33, 44);
+        const M3d::Quat q3 = q1 + q2;
 
         // Compare results
         CPPUNIT_ASSERT_DOUBLES_EQUAL(12, q3.x, TOLERANCE);
@@ -508,9 +507,9 @@ public:
     void testOperatorSubtract() {
 
         // Do subtraction
-        const Quat q1(1, 2, 3, 4);
-        const Quat q2(11, 22, 33, 44);
-        const Quat q3 = q1 - q2;
+        const M3d::Quat q1(1, 2, 3, 4);
+        const M3d::Quat q2(11, 22, 33, 44);
+        const M3d::Quat q3 = q1 - q2;
 
         // Compare results
         CPPUNIT_ASSERT_EQUAL(-10.0, q3.x);
@@ -524,8 +523,8 @@ public:
      */
     void testToMat3() {
 
-        const Quat q = Quat::fromAxisAngle(Vec3(0,1,0), ANGLE_45);
-        const Mat3 mat = q.toMat3();
+        const M3d::Quat q = M3d::Quat::fromAxisAngle(M3d::Vec3(0,1,0), ANGLE_45);
+        const M3d::Mat3 mat = q.toMat3();
 
         CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.707, mat[0][0], TOLERANCE);
         CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.000, mat[1][0], TOLERANCE);
@@ -543,10 +542,10 @@ public:
      */
     void testMultiply() {
 
-        const Quat q1 = Quat::fromAxisAngle(Vec3(0,1,0), ANGLE_30);
-        const Quat q2 = Quat::fromAxisAngle(Vec3(0,1,0), ANGLE_45);
-        const Quat q3 = q2 * q1;
-        const Mat3 mat = q3.toMat3();
+        const M3d::Quat q1 = M3d::Quat::fromAxisAngle(M3d::Vec3(0,1,0), ANGLE_30);
+        const M3d::Quat q2 = M3d::Quat::fromAxisAngle(M3d::Vec3(0,1,0), ANGLE_45);
+        const M3d::Quat q3 = q2 * q1;
+        const M3d::Mat3 mat = q3.toMat3();
 
         CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.259, mat[0][0], TOLERANCE);
         CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.000, mat[1][0], TOLERANCE);
@@ -598,11 +597,9 @@ public:
     CPPUNIT_TEST_SUITE_END();
 };
 
-} /* namespace M3d */
-
 int main(int argc, char *argv[]) {
     CppUnit::TextUi::TestRunner runner;
-    runner.addTest(M3d::QuatTest::suite());
+    runner.addTest(QuatTest::suite());
     runner.run();
     return 0;
 }
