@@ -545,7 +545,7 @@ public:
      */
     void testInverse() {
 
-        m2 = inverse(m1);
+        m2 = M3d::inverse(m1);
         m3 = m1 * m2;
 
         for (int i = 0; i < Mat3::ORDER; ++i) {
@@ -821,7 +821,7 @@ public:
      * Ensures transposing a matrix works correctly.
      */
     void testTranspose() {
-        m2 = transpose(m1);
+        m2 = M3d::transpose(m1);
         for (int i = 0; i < Mat3::ORDER; ++i) {
             for (int j = 0; j < Mat3::ORDER; ++j) {
                 CPPUNIT_ASSERT_DOUBLES_EQUAL(m1[j][i], m2[i][j], TOLERANCE);

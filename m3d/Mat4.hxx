@@ -123,6 +123,9 @@ private:
     int signs[4][4];
 };
 
+Mat4 inverse(const Mat4& mat);
+Mat4 transpose(const Mat4& mat);
+
 } /* namespace M3d */
 
 std::ostream& operator<<(std::ostream &stream, const M3d::Mat4& mat);

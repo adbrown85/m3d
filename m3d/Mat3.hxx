@@ -122,6 +122,9 @@ private:
     int signs[ORDER][ORDER];
 };
 
+Mat3 inverse(const Mat3& mat);
+Mat3 transpose(const Mat3& mat);
+
 } /* namespace M3d */
 
 std::ostream& operator<<(std::ostream &stream, const M3d::Mat3& mat);

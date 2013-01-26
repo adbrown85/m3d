@@ -839,7 +839,7 @@ public:
      */
     void testInverse() {
 
-        m2 = inverse(m1);
+        m2 = M3d::inverse(m1);
         m3 = m1 * m2;
 
         for (int i = 0; i < 4; ++i) {
@@ -1216,7 +1216,7 @@ public:
         m2 = Mat4::fromArrayInColumnMajor(arr);
 
         // Transpose it and compare
-        m3 = transpose(m1);
+        m3 = M3d::transpose(m1);
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 4; ++j) {
                 CPPUNIT_ASSERT(m2[j][i] == m3[j][i]);
