@@ -71,6 +71,7 @@ public:
     void toArray(double arr[4]);
     void toArray(float arr[4]);
     std::string toString() const;
+    Vec3 toVec3() const;
 // Friends
     friend double dot(const Vec4& u, const Vec4 &v);
     friend double length(const Vec4 &v);

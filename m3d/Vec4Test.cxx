@@ -105,12 +105,24 @@ public:
         CPPUNIT_ASSERT_EQUAL(4.0, v1.w);
     }
 
+    /**
+     * Ensures `Vec4::toVec3` works correctly.
+     */
+    void testToVec3() {
+        const M3d::Vec4 v4(1, 2, 3, 4);
+        const M3d::Vec3 v3 = v4.toVec3();
+        CPPUNIT_ASSERT_EQUAL(v4.x, v3.x);
+        CPPUNIT_ASSERT_EQUAL(v4.y, v3.y);
+        CPPUNIT_ASSERT_EQUAL(v4.z, v3.z);
+    }
+
     CPPUNIT_TEST_SUITE(Vec4Test);
     CPPUNIT_TEST(testAdd);
     CPPUNIT_TEST(testSubtract);
     CPPUNIT_TEST(testMultiply);
     CPPUNIT_TEST(testDivide);
     CPPUNIT_TEST(testOperatorUnaryPlus);
+    CPPUNIT_TEST(testToVec3);
     CPPUNIT_TEST_SUITE_END();
 };
 

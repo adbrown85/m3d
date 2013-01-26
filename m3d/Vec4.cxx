@@ -489,6 +489,15 @@ string Vec4::toString() const {
     return stream.str();
 }
 
+/**
+ * Creates a vector from the first three components of this vector.
+ *
+ * @return Vector with a copy of the first three components of this vector
+ */
+Vec3 Vec4::toVec3() const {
+    return Vec3(x, y, z);
+}
+
 } /* namespace M3d */
 
 /**
