@@ -73,6 +73,10 @@ public:
     friend Quat normalize(const Quat& q);
 };
 
+Quat conjugate(const Quat& q);
+double magnitude(const Quat& q);
+Quat normalize(const Quat& q);
+
 } /* namespace M3d */
 
 std::ostream& operator<<(std::ostream& stream, const M3d::Quat& q);
